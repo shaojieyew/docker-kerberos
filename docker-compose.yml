@@ -6,12 +6,14 @@ services:
   kdc-kadmin:
     build: ./kdc-kadmin
     env_file: kerberos.env
+    image: kdc-kadmin:1.0.0
     volumes:
       # This is needed otherwise there won't be enough entropy to generate a new kerberos realm
       - /dev/urandom:/dev/random
 
   kerberos-client:
     build: ./kerberos-client
+    image: kerberos-client:1.0.0
     env_file: kerberos.env
     depends_on:
       - kdc-kadmin
